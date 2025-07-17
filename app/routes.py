@@ -1,7 +1,7 @@
 from flask import render_template, request, jsonify, send_file
-from .rediss import is_rate_limited
+from .rate_limited import rate_limit
 from .video_downloader import download_video
-from .photo_downloder import download_photo, username, password
+from .photo_downloder import download_photo
 import os
 def all_routes(app):
     @app.route("/")
