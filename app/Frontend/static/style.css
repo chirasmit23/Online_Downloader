@@ -179,12 +179,11 @@ form {
   border-style: ridge;
   background-color: black;
 }
-
-.buttonn{
+    .buttonn{
         background-color: rgba(0, 128, 0, 0.431);
-        font-size: 0.8em;
-        width: 10vh;
-        padding: 8px 44px;
+        font-size: 0.6em;
+        width: 8vh;
+        padding: 8px 34px;
         border-radius: 10px;
         color: white;
         text-decoration: none;}
