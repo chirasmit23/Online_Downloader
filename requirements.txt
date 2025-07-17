@@ -3,7 +3,7 @@ requests==2.31.0
 redis==5.0.1
 selenium==4.14.0
 webdriver-manager==4.0.1
-yt-dlp==2025.7.16
+yt-dlp==2025.4.28
 python-dotenv==1.0.1
 python-dotenv
 gunicorn 
