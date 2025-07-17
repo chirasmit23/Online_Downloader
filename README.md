@@ -27,8 +27,8 @@ https://github.com/user-attachments/assets/9fd6ee06-452d-49dc-b31f-bcd0485f76db
 
  ## Mobile_responsive
 
-<img src="https://github.com/user-attachments/assets/0458267b-c1c9-4980-81bc-e984beef763e" height="250"  width="500"/>
-<img src="https://github.com/user-attachments/assets/a9f9ae9b-8859-495f-bc74-7d518e30040b" height="250" width="500"/>
+<img src="https://github.com/user-attachments/assets/0458267b-c1c9-4980-81bc-e984beef763e" height="400"  width="450"/>
+<img src="https://github.com/user-attachments/assets/a9f9ae9b-8859-495f-bc74-7d518e30040b" height="400" width="450"/>
 
 ### Future Plans:
 
