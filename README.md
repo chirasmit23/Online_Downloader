@@ -18,7 +18,7 @@ HereYou can check out my application->[Online_Downloader](https://online-downloa
 
 ### 1. Clone the Repository
 
-git clone https://github.com/your-username/instagram-video-downloader.git
+git clone https://github.com/chirasmit23/Online_Downloader.git
 
 ### 2. Open (http://127.0.0.1:10000) with browser to see the result
  ## Demo Video
