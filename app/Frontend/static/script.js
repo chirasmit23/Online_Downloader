@@ -2,10 +2,7 @@ document.getElementById("option")?.addEventListener("change", (e) => {
   const selectedId = e.target.options[e.target.selectedIndex]?.id;
   const colorMap = {
     black: "black",
-    red: "red",
-    green: "green",
     blue: "blue",
-    yellow: "yellow"
   };
   document.body.style.transition = "none";
   document.body.style.backgroundColor = colorMap[selectedId] || "#082567";
@@ -70,6 +67,14 @@ function handleFormSubmitIfExists(selector, endpoint, filenameTemplate) {
   if (form) {
     handleFormSubmit(form, endpoint, filenameTemplate);
   }
+}
+function showPopup(message, isSuccess = true) {
+  const popup = document.createElement("div");
+  popup.className = "popup" + (isSuccess ? "" : " failed");
+  popup.textContent = message;
+  document.body.appendChild(popup);
+  popup.style.display = "block";
+  setTimeout(() => popup.remove(), 3000);
 }
 handleFormSubmitIfExists("#videoForm", "/video", "video_{ts}.mp4");
 handleFormSubmitIfExists("#photoForm", "/photo", "photo_{ts}.jpg");
