@@ -1,0 +1,302 @@
+
+html,body {
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    width:100%;
+    height:100%
+}
+#photodownloaderbutton {
+    background-color:yellow;
+    color: black ;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    position: absolute;
+    top: 22px; 
+    left: 11px; 
+    text-decoration: none;
+}
+.darkmode{
+  position: absolute;
+  right:20px;
+  top:5vh;
+  font-size: 1.1em;
+  padding: 3px 3px 3px 3px;
+  border-radius: 5px;
+  background-color: black;
+  color: green;
+}
+#option{
+  font-size: 0.8em;
+  padding-bottom: 1px;
+  background-color:black;
+  color: darkgreen;
+}
+.enable{
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 4px;
+  padding:3px 3px 3px 3px; ;
+  border-style: ridge;
+  background-color: black;
+}
+.disable{
+  font-size: 1em;
+  font-weight: bold;
+ border-radius: 4px;
+  padding:3px 3px 3px 3px; ;
+  border-style: ridge;
+  background-color: black;
+}
+#black{
+  background-color: black;
+}
+#blue {
+  background-color: black;
+}
+.chiros-style {
+            color: chartreuse;
+            font-size: 4em;
+            font-weight: bold;
+            font-family: 'elegant';
+        }
+.card {
+    max-width: 600px; 
+    margin: auto; 
+    background-color: plum;
+    padding: 30px; 
+    border-radius: 10px; 
+}
+.card button {
+    background-color: blue;
+    color: white;
+    padding: 8px 16px;
+    font-size: 13px;
+    border-radius: 70px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+ .step-box {
+    display: flex;
+    flex-direction: column;
+    font-family: monospace;
+    font-size: 18px;
+    color: white;
+    gap: 1px;
+    max-width: 500px;
+    margin: auto;
+  }
+  .step-row {
+    display: flex;
+    align-items: start;
+  }
+  .step-label {
+    width: 80px; 
+    font-weight: bold;
+  }
+  .step-text {
+    flex: 1;
+  }
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.card input, 
+.card select {
+    width: 90%;
+    padding: 10px;
+    margin: 8px auto;
+    border: 2px solid #B300B3;
+    border-radius: 20px; 
+    font-size: 15px;
+    text-align: center;
+    outline: none;
+}
+.popup {
+  position: absolute;
+  top: 23px;
+  left:42%;
+  width: 5cm;
+  background: #4caf50;
+  color: white;
+  padding: 12px;
+  border-radius: 8px;
+  z-index: 9999;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+.popup.failed {
+  background: #f44336;
+}
+.buttonn{
+        background-color: rgba(0, 128, 0, 0.431);
+        font-size: 1.1em;
+        padding: 10px 70px;
+        border-radius: 10px;
+        color: white;
+        text-decoration: none;}
+@media (max-width: 768px) {
+  .card {
+    max-width: 80%;
+    padding: 20px;
+    margin-left: auto;
+    background-color: plum;
+  }
+ .darkmode{
+  position: absolute;
+  right:10px;
+  top:4vh;
+  font-size: 1.1em;
+  padding: 3px 3px 3px 3px;
+  border-radius: 5px;
+  background-color: black;
+  color: green;
+}
+.option{
+  font-size: 0.8em;
+  padding-bottom: 1px;
+  background-color:black;
+  color: darkgreen;
+}
+#enable{
+  font-size: 1em;
+  font-weight: bold;
+  border-radius: 4px;
+  padding:3px 3px 3px 3px; ;
+  border-style: ridge;
+  background-color: black;
+}
+#disable{
+  font-size: 1em;
+  font-weight: bold;
+ border-radius: 4px;
+  padding:3px 3px 3px 3px; ;
+  border-style: ridge;
+  background-color: black;
+}
+
+.buttonn{
+        background-color: rgba(0, 128, 0, 0.431);
+        font-size: 0.8em;
+        width: 10vh;
+        padding: 8px 44px;
+        border-radius: 10px;
+        color: white;
+        text-decoration: none;}
+  .popup {
+    position: fixed;
+    top: 18%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 3cm;
+    background: black;
+    color: #00FF00; /* bright green text */
+    padding: 10px;
+    border-radius: 10px;
+    z-index: 9999;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 255, 0, 0.3);
+    transition: all 0.3s ease;
+  }
+
+  .popup.failed {
+    background: #f44336;
+    color: white;
+  }
+}
+
+form input, form select, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+}
+
+.form-label{
+    font-weight: bold;
+}
+
+
+body {
+            background-color:#082567;
+           margin-left: 1px;
+}
+        .thank-you {
+            color: yellow;
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            animation: blink 1.5s infinite alternate;
+            margin-bottom: 5vh;
+        }
+        @keyframes blink {
+            50% { opacity: 0.3; }
+        }
+        .text-center h1, .text-center h6 {
+            color: black;
+        }
+        .text-center h4 {
+            color: darkmagenta;
+            text-align: center;
+            font-size: 10px;
+            font-weight: bold;
+        }
+            .button {
+        background-color: rgba(0, 128, 0, 0.431);
+        font-size: 1.1em;
+        padding: 10px 70px;
+        border-radius: 10px;
+        color: white;
+        text-decoration: none;
+    }
+    .download-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px 16px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+}
+.btn-text,
+.btn-spinner {
+  display: inline-block;
+}
+  .loader {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #ffffff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 15px;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .loader {
+    border: 6px solid #f3f3f3;
+    border-top: 6px solid #ffffff;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    margin-bottom: 15px;
+    animation: spin 1s linear infinite;
+  }
+  @keyframes spin {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

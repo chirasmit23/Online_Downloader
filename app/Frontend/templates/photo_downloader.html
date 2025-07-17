@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiros-All Video Downloader</title>
+    <link rel="stylesheet" href="static/style.css"></head>
+   <body>
+   <div class="darkmode">Dark mode 
+  <select id="option">
+    <option class="nil">Click here</option>
+    <option class="enable" id="black">Enable</option>
+    <option class="disable" id="blue">Disable</option>
+  </select>
+</div>
+   <div style="height: 1vh;"></div>
+<div class="container mt-5">
+    <h2 class="chiros-style">chiros</h2>
+    
+    <h1 class="text-center"> Photos Downloader</h1>
+    <div style="height: 35px;"></div>
+    <div class="card p-4 shadow custom-card">
+        <!-- 🔙 Back Button to All Videos Downloader -->
+        <a href="/" class="buttonn">🔙 Back Button to All Videos Downloader</a>   
+        <div style="height: 20px;"></div>
+        <form action="/photo" method="post" id ="photoForm">
+            <label for="username" style="color: black;font-weight: bold;"> username:</label>
+            <input type="text" id="username" name="username"  placeholder="Paste User-id here...">
+            <label for="password"style="color: black;font-weight: bold;">password:</label>
+<div style="position: relative;">
+    <input type="password" id="password" name="password" required placeholder="Paste password here..." >
+    <span onclick="togglePassword()" id="icon"style="position: absolute; top: 50%; right: 30px; transform: translateY(-50%); cursor: pointer;">
+        👁️
+    </span>
+</div>
+            <label for="url"style="color: black;font-weight: bold;">Enter Photos URL:</label>
+            <input type="text" id="url" name="url"  placeholder="Paste Photos URL here...">
+        <button class="download-button" type="submit">
+    <span class="btn-text" style="font-weight: bold;">Download</span>
+    <span class="btn-spinner" style="display: none;">⏳ Downloading...</span>
+  </button></span>
+  
+</button>
+        </form>
+    </div>
+</div>
+
+<div style="height: 60px;"></div> <!-- Adds 65px gap -->
+<h4 class="text-center" style="color: white;">if you want to recheck your password simply you will click the Eye button inside password section</h4>
+<div style="height: 5px;"></div> <!-- Adds 65px gap -->
+<h4 class="text-center" style="color: white;">Password required only for instagram post downloader<br>To download photos from other platforms no need to login via username or password,you can put any username or random password</h4>
+<h4 class="text-center"style="color: white;">Your login data will not be stored, so it's 100% secure</h4>
+<div style="text-align: center;">
+    <img src="{{ url_for('static', filename='pic.png.webp') }}" width="180" style="border: 4px solid white; box-shadow: 0px 4px 20px rgba(0,0,0,0.5); border-radius: 12px;" alt="Guide photo"> 
+  </div>
+<div style="height: 40px;"></div>
+<p style="color: green;">Contact to owner:<a style="color:cornflowerblue;text-decoration: none;"href="https://www.linkedin.com/in/chirasmit-choudhury-2784152b6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"  class="text-center" style="color:cornflowerblue;text-decoration: none;"> linkedIn </a>&nbsp;&nbsp;&nbsp;<a style="color:cornflowerblue;text-decoration: none;"href="https://www.instagram.com/chirasmit_choudhury?utm_source=qr&igsh=MWZ4eTMyNHc3dDhvZw=="  class="text-center"> Instagram</a></p>
+<h2 class="thank-you">Thanks for visiting chiros - created by Chirasmit</h2>
+ <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

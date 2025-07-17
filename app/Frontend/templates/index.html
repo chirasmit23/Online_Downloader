@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chiros-All Video Downloader</title> 
+    <link rel="stylesheet" href="static/style.css">
+</head>
+<body>
+ 
+    <nav>
+        <a href="/photo" id="photodownloaderbutton" >All Photo Downloader</a>
+    </nav>
+    <div class="darkmode">Dark mode 
+  <select id="option">
+    <option class="nil">Click here</option>
+    <option class="enable" id="black">Enable</option>
+    <option class="disable" >Disable</option>
+  </select>
+</div>
+
+    <div class="container"> <div style="height: 7px;"></div>
+        <h2 class="chiros-style">chiros</h2>
+    
+        <h1 class="AVD">All Videos Downloader</h1>
+        <div style="height: 35px;"></div>
+        <div class="card ">
+            <form action="/video" method="post" id="videoForm">
+                <div class="box">
+                    <label for="url" class="form-label">Enter Video URL:</label>
+                    <input type="text" name="url" class="form-control" placeholder="Paste video URL here...">
+                </div>
+                
+
+                
+                <!-- Video Quality Selection -->
+                <div class="mb-3">
+                    <label for="quality" class="form-label mt-3">Select Video Quality:</label>
+                    <select name="quality" class="form-control">
+                        <option value="best">Best Available</option>
+                        <option value="1080">1080p</option>
+                        <option value="720">720p</option>
+                        <option value="480">480p</option>
+                    </select>
+                </div>
+                  <button class="download-button" type="submit">
+    <span class="btn-text"style="font-weight: bold;">Download</span>
+    <span class="btn-spinner" style="display: none;">⏳ Downloading...</span>
+  </button>
+            </form>
+            
+</div>
+        </div>
+    </div>
+    <div style="height: 50px;"></div> 
+    
+    <div class="step-box">
+        <div class="step-row">
+          <div class="step-label">Step 1→</div>
+          <div class="step-text">Copy your video Url and paste it in the Enter video Url section</div>
+        </div>
+        <div style="height: 6px;"></div>
+        <div class="step-row">
+          <div class="step-label">Step 2→</div>
+          <div class="step-text">Choose your desire resolution</div>
+        </div>
+        <div style="height: 6px;"></div>
+        <div class="step-row">
+          <div class="step-label">Step 3→</div>
+          <div class="step-text">Click the Download button and wait some seconds to download your video</div>
+        </div>
+      </div>
+<div style="height: 10px;"></div>
+<h4 class="text-center" style="color: darkkhaki;">Here you can download most of the online platforms video like-Instagram ,Facebook,Dailymotion,X etc</h4>
+<footer>
+<div style="text-align: center;">
+    <img src="{{ url_for('static', filename='picc.jpg') }}" width="150" style="border: 4px solid white; box-shadow: 0px 4px 20px rgba(0,0,0,0.5); border-radius: 12px;" alt="Guide Photo"> 
+  </div>
+<p style="color: green;">Contact to owner:<a href="https://www.linkedin.com/in/chirasmit-choudhury-2784152b6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" style="color:cornflowerblue;text-decoration: none;" class="text-center"> linkedIn </a>&nbsp;&nbsp;&nbsp;<a href="https://www.instagram.com/chirasmit_choudhury?utm_source=qr&igsh=MWZ4eTMyNHc3dDhvZw==" style="color:cornflowerblue;text-decoration: none;"class="text-center"> Instagram</a></p>
+<h2 class="thank-you">Thanks for visiting chiros - created by Chirasmit</h2>
+<div style="height: 4px;"></div>
+    </footer>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    </body>
+    </html>
+    
