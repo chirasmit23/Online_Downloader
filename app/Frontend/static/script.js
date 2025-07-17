@@ -21,11 +21,9 @@ function handleFormSubmit(form, endpoint, filenameTemplate) {
     const button = form.querySelector(".download-button");
     const btnText = button.querySelector(".btn-text");
     const spinner = button.querySelector(".btn-spinner");
-    const layer = document.getElementById("downloadOverlay");
     button.disabled = true;
     btnText.style.display = "none";
     spinner.style.display = "inline-block";
-    if (layer) layer.style.display = "flex";
     try {
       const response = await fetch(endpoint, {
         method: "POST",
@@ -52,7 +50,7 @@ function handleFormSubmit(form, endpoint, filenameTemplate) {
       showPopup("Download Successful ✅", true);
     } catch (err) {
       if (err.message !== "Rate limited") {
-        showPopup("Download failed. Try again.", false);
+        showPopup("Download failed❌", false);
       }
     } finally {
       button.disabled = false;
