@@ -27,11 +27,11 @@ https://github.com/user-attachments/assets/9fd6ee06-452d-49dc-b31f-bcd0485f76db
 
  ## Mobile_responsive
 
-<img src="https://github.com/user-attachments/assets/0458267b-c1c9-4980-81bc-e984beef763e" width="100"/>
-<img src="https://github.com/user-attachments/assets/a9f9ae9b-8859-495f-bc74-7d518e30040b" width="100"/>
-🧭 Future Plans
-Currently, this tool occasionally fails to download Instagram videos or posts, mainly due to rate-limiting and IP bans from Instagram and other platforms.
+<img src="https://github.com/user-attachments/assets/0458267b-c1c9-4980-81bc-e984beef763e" height="200" width="200"/>
+<img src="https://github.com/user-attachments/assets/a9f9ae9b-8859-495f-bc74-7d518e30040b" height="200" width="200"/>
+### Future Plans:
 
+Currently, this tool occasionally fails to download Instagram videos or posts, mainly due to rate-limiting and IP bans from Instagram and other platforms.
 To solve this issue and ensure more reliable downloads, the following improvements are planned:
 
 ### IP Rotation with Proxies:
