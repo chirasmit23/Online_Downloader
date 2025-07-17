@@ -49,6 +49,6 @@ def all_routes(app):
                 download_name=os.path.basename(file_path)
             )
         else:
-            return jsonify (["some error occuers to download photo please retry"])
+            return jsonify({"error": "Failed to download video"}), 400
         
         
