@@ -25,9 +25,8 @@ git clone https://github.com/your-username/instagram-video-downloader.git
 
 https://github.com/user-attachments/assets/9fd6ee06-452d-49dc-b31f-bcd0485f76db
 ##Mobile responsive
-
-![WhatsApp Image 2025-07-17 at 23 56 57_5603dba1](https://github.com/user-attachments/assets/0458267b-c1c9-4980-81bc-e984beef763e)
-![WhatsApp Image 2025-07-17 at 23 56 57_b388684a](https://github.com/user-attachments/assets/a9f9ae9b-8859-495f-bc74-7d518e30040b)
+<img src="https://github.com/user-attachments/assets/0458267b-c1c9-4980-81bc-e984beef763e" width="400"/>
+<img src="https://github.com/user-attachments/assets/a9f9ae9b-8859-495f-bc74-7d518e30040b" width="400"/>
 🧭 Future Plans
 Currently, this tool occasionally fails to download Instagram videos or posts, mainly due to rate-limiting and IP bans from Instagram and other platforms.
 
