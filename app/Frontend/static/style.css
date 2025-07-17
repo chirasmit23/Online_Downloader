@@ -205,11 +205,22 @@ form {
   }
 
   .popup.failed {
-    background: #f44336;
-    color: white;
+    position: fixed;
+    top: 22.6%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 3cm;
+    background: black;
+    color: #00FF00; 
+    padding: 8px;
+    border-radius: 10px;
+    z-index: 9999;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 255, 0, 0.3);
+    transition: all 0.3s ease;
   }
 }
-
 form input, form select, form textarea {
     width: 100%;
     padding: 10px;
