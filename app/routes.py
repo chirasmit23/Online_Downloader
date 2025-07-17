@@ -1,5 +1,4 @@
 from flask import render_template, request, jsonify, send_file
-from . import app
 from .rediss import is_rate_limited
 from .video_downloader import download_video
 from .photo_downloder import download_photo, username, password
