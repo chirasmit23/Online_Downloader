@@ -19,29 +19,30 @@ function handleFormSubmit(form, endpoint, filenameTemplate) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const button = form.querySelector(".download-button");
-    const btnText = button.querySelector(".btn-text");
-    const spinner = button.querySelector(".btn-spinner");
+    const btnText = button?.querySelector(".btn-text");
+    const spinner = button?.querySelector(".btn-spinner");
     button.disabled = true;
-    btnText.style.display = "none";
-    spinner.style.display = "inline-block";
+    if (btnText) btnText.style.display = "none";
+    if (spinner) spinner.style.display = "inline-block";
     try {
       const response = await fetch(endpoint, {
         method: "POST",
-        body: new FormData(form)
+        body: new FormData(form),
       });
+      const contentType = response.headers.get("Content-Type");
       if (response.status === 429) {
         const data = await response.json();
-        showPopup(data.message || "Rate limit exceeded.", false);
+        showPopup(data.message || "Rate limit exceeded ❌", false);
         throw new Error("Rate limited");
       }
-      if (!response.ok) {
+      if (!response.ok || !contentType?.includes("video") && !contentType?.includes("image")) {
         const data = await response.json();
-        showPopup(data.message || "Download failed.", false);
-        throw new Error("Download error");
+        showPopup(data.message || "Download failed ❌", false);
+        throw new Error("Invalid response");
       }
       const blob = await response.blob();
-      const downloadLink = document.createElement("a");
       const finalName = filenameTemplate.replace("{ts}", Date.now());
+      const downloadLink = document.createElement("a");
       downloadLink.href = URL.createObjectURL(blob);
       downloadLink.download = finalName;
       document.body.appendChild(downloadLink);
@@ -50,21 +51,21 @@ function handleFormSubmit(form, endpoint, filenameTemplate) {
       showPopup("Download Successful ✅", true);
     } catch (err) {
       if (err.message !== "Rate limited") {
-        showPopup("Download failed❌", false);
+        showPopup("Download failed ❌", false);
       }
     } finally {
       button.disabled = false;
-      btnText.style.display = "inline";
-      spinner.style.display = "none";
-      if (overlay) overlay.style.display = "none";
+      if (btnText) btnText.style.display = "inline";
+      if (spinner) spinner.style.display = "none";
+      if (typeof overlay !== "undefined" && overlay) {
+        overlay.style.display = "none";
+      }
     }
   });
 }
 function handleFormSubmitIfExists(selector, endpoint, filenameTemplate) {
   const form = document.querySelector(selector);
-  if (form) {
-    handleFormSubmit(form, endpoint, filenameTemplate);
-  }
+  if (form) handleFormSubmit(form, endpoint, filenameTemplate);
 }
 function showPopup(message, isSuccess = true) {
   const popup = document.createElement("div");
