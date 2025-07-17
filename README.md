@@ -11,6 +11,7 @@ HereYou can check out my application->[Online_Downloader](https://online-downloa
 - ✅ Automated photo scraping via Selenium (headless Chrome)
 - ✅ Quality selector for video downloads
 - ✅ Simple HTML/CSS/JS frontend
+- ✅ Dar Mode Enable-Disable
 
 ---
 
