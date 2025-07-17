@@ -1,3 +1,4 @@
+
 document.getElementById("option")?.addEventListener("change", (e) => {
   const selectedId = e.target.options[e.target.selectedIndex]?.id;
   const colorMap = {
@@ -31,14 +32,26 @@ function handleFormSubmit(form, endpoint, filenameTemplate) {
       });
       const contentType = response.headers.get("Content-Type");
       if (response.status === 429) {
-        const data = await response.json();
-        showPopup(data.message || "Rate limit exceeded ❌", false);
+        try {
+          const data = await response.json();
+          showPopup(data.message || "Rate limit exceeded ❌", false);
+        } catch {
+          showPopup("Rate limit exceeded ❌", false);
+        }
         throw new Error("Rate limited");
       }
-      if (!response.ok || !contentType?.includes("video") && !contentType?.includes("image")) {
-        const data = await response.json();
-        showPopup(data.message || "Download failed ❌", false);
+      if (!response.ok) {
+        try {
+          const data = await response.json();
+          showPopup(data.message || "Download failed ❌", false);
+        } catch {
+          showPopup("Download failed ❌", false);
+        }
         throw new Error("Invalid response");
+      }
+      if (!contentType?.includes("video") && !contentType?.includes("image")) {
+        showPopup("Invalid media type ❌", false);
+        throw new Error("Invalid media");
       }
       const blob = await response.blob();
       const finalName = filenameTemplate.replace("{ts}", Date.now());
