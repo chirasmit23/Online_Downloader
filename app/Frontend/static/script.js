@@ -1,4 +1,3 @@
-
 document.getElementById("option")?.addEventListener("change", (e) => {
   const selectedId = e.target.options[e.target.selectedIndex]?.id;
   const colorMap = {
@@ -16,15 +15,25 @@ function togglePassword() {
   passwordInput.type = isHidden ? "text" : "password";
   toggleIcon.textContent = isHidden ? "🙈" : "👁️";
 }
-function handleFormSubmit(form, endpoint, filenameTemplate) {
+function showPopup(message) {
+  const popup = document.createElement("div");
+  popup.className = "popup failed";
+  popup.textContent = message;
+  document.body.appendChild(popup);
+  popup.style.display = "block";
+  setTimeout(() => popup.remove(), 3000);
+}
+function FormSubmit(form, endpoint, filenameTemplate) {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
     const button = form.querySelector(".download-button");
     const btnText = button?.querySelector(".btn-text");
     const spinner = button?.querySelector(".btn-spinner");
-    button.disabled = true;
+
+    if (button) button.disabled = true;
     if (btnText) btnText.style.display = "none";
     if (spinner) spinner.style.display = "inline-block";
+
     try {
       const response = await fetch(endpoint, {
         method: "POST",
@@ -34,24 +43,20 @@ function handleFormSubmit(form, endpoint, filenameTemplate) {
       if (response.status === 429) {
         try {
           const data = await response.json();
-          showPopup(data.message || "Rate limit exceeded ❌", false);
+          showPopup(data.message || "Rate limit exceeded ❌");
         } catch {
-          showPopup("Rate limit exceeded ❌", false);
+          showPopup("Rate limits exceeded ❌");
         }
-        throw new Error("Rate limited");
+        return;
       }
-      if (!response.ok) {
+      if (!response.ok || !contentType?.includes("video") && !contentType?.includes("image")) {
         try {
           const data = await response.json();
-          showPopup(data.message || "Download failed ❌", false);
+          showPopup(data.message || "Download failed ❌");
         } catch {
-          showPopup("Download failed ❌", false);
+          showPopup("Download failed ❌");
         }
-        throw new Error("Invalid response");
-      }
-      if (!contentType?.includes("video") && !contentType?.includes("image")) {
-        showPopup("Invalid media type ❌", false);
-        throw new Error("Invalid media");
+        return;
       }
       const blob = await response.blob();
       const finalName = filenameTemplate.replace("{ts}", Date.now());
@@ -60,33 +65,19 @@ function handleFormSubmit(form, endpoint, filenameTemplate) {
       downloadLink.download = finalName;
       document.body.appendChild(downloadLink);
       downloadLink.click();
-      document.body.removeChild(downloadLink);
-      showPopup("Download Successful ✅", true);
+      setTimeout(() => document.body.removeChild(downloadLink), 500);
     } catch (err) {
-      if (err.message !== "Rate limited") {
-        showPopup("Download failed ❌", false);
-      }
+      showPopup("Unexpected error occurred ❌");
     } finally {
-      button.disabled = false;
+      if (button) button.disabled = false;
       if (btnText) btnText.style.display = "inline";
       if (spinner) spinner.style.display = "none";
-      if (typeof overlay !== "undefined" && overlay) {
-        overlay.style.display = "none";
-      }
     }
   });
 }
-function handleFormSubmitIfExists(selector, endpoint, filenameTemplate) {
+function FormSubmitIfExists(selector, endpoint, filenameTemplate) {
   const form = document.querySelector(selector);
-  if (form) handleFormSubmit(form, endpoint, filenameTemplate);
+  if (form) FormSubmit(form, endpoint, filenameTemplate);
 }
-function showPopup(message, isSuccess = true) {
-  const popup = document.createElement("div");
-  popup.className = "popup" + (isSuccess ? "" : " failed");
-  popup.textContent = message;
-  document.body.appendChild(popup);
-  popup.style.display = "block";
-  setTimeout(() => popup.remove(), 3000);
-}
-handleFormSubmitIfExists("#videoForm", "/video", "video_{ts}.mp4");
-handleFormSubmitIfExists("#photoForm", "/photo", "photo_{ts}.jpg");
+FormSubmitIfExists("#videoForm", "/video", "video_{ts}.mp4");
+FormSubmitIfExists("#photoForm", "/photo", "photo_{ts}.jpg");
