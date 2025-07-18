@@ -115,12 +115,12 @@ form {
     text-align: center;
     outline: none;
 }
-.popup {
-  position: absolute;
+.popup.failed {
+    position: absolute;
   top: 23px;
   left:42%;
   width: 5cm;
-  background: #4caf50;
+   background: black;
   color: white;
   padding: 12px;
   border-radius: 8px;
@@ -129,9 +129,6 @@ form {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   text-align: center;
   transition: all 0.3s ease;
-}
-.popup.failed {
-  background: #f44336;
 }
 .buttonn{
         background-color: rgba(0, 128, 0, 0.431);
@@ -187,23 +184,6 @@ form {
         border-radius: 10px;
         color: white;
         text-decoration: none;}
-  .popup {
-    position: fixed;
-    top: 22.6%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 3cm;
-    background: black;
-    color: #00FF00; /* bright green text */
-    padding: 10px;
-    border-radius: 10px;
-    z-index: 9999;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    box-shadow: 0 4px 12px rgba(0, 255, 0, 0.3);
-    transition: all 0.3s ease;
-  }
-
   .popup.failed {
     position: fixed;
     top: 22.6%;
