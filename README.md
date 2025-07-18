@@ -31,6 +31,10 @@ https://github.com/user-attachments/assets/9fd6ee06-452d-49dc-b31f-bcd0485f76db
 <img src="https://github.com/user-attachments/assets/0458267b-c1c9-4980-81bc-e984beef763e" height="400"  width="450"/>
 <img src="https://github.com/user-attachments/assets/a9f9ae9b-8859-495f-bc74-7d518e30040b" height="400" width="450"/>
 
+### Challenges & Learnings:
+
+This application can able to download different Site's Video and post in local browser But after hosting&deploying in render , an online downloader was particularly tricky due to rate limits, content restrictions, and bot detection. I integrated Redis for request limiting and Selenium for dynamic login/post scraping. I also faced deployment challenges on Render, especially rate-limited and ip ban, handling multiple files and ChromeDriver issues — all of which I’ve documented.
+
 ### Future Plans:
 
 Currently, this tool occasionally fails to download Instagram videos or posts, mainly due to rate-limiting and IP bans from Instagram and other platforms.
