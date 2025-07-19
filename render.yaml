@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: Online_Downloader
+    env: python
+    buildCommand: |
+      apt-get update && apt-get install -y chromium chromium-driver
+      pip install -r requirements.txt
+    startCommand: python main.py
+    envVars:
+      - key: PYTHONUNBUFFERED
+        value: "TRUE"
+      - key: CHROME_BIN
+        value: "/usr/bin/chromium"
+      - key: CHROMEDRIVER_PATH
+        value: "/usr/bin/chromedriver"
+    plan: free
+    region: oregon
