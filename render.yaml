@@ -1,3 +1,4 @@
+startCommand: gunicorn app:app --timeout 120 --workers 1 --threads 2
 services:
   - type: web
     name: Online_Downloader
