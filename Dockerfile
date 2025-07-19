@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 RUN apt-get update && apt-get install -y \
-    chromium chromium-driver \
+    chromium chromium-driver ffmpeg \
     wget curl unzip gnupg \
     fonts-liberation libappindicator3-1 libasound2 libnspr4 libnss3 \
     libx11-xcb1 libxcomposite1 libxdamage1 libxrandr2 libatk-bridge2.0-0 \
@@ -11,7 +11,7 @@ ENV CHROMEDRIVER_PATH=/usr/bin/chromedriver
 ENV PYTHONUNBUFFERED=TRUE
 WORKDIR /app
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
-COPY . .
+RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r requirements.txt
+COPY . . .
 EXPOSE 10000
-CMD ["gunicorn", "-b", "0.0.0.0:10000", "main:app"]
+CMD ["gunicorn", "-b", "0.0.0.0:10000", "--timeout", "120", "--workers", "1", "--threads", "2", "main:app"]
