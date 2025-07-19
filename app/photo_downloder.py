@@ -2,12 +2,14 @@ import os
 import uuid
 import time
 import requests
+from bs4 import BeautifulSoup
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 download_folder = os.path.join(os.path.expanduser("~"), "Downloads")
 os.makedirs(download_folder, exist_ok=True)
 def download_photo(post_url, username, password):
@@ -19,7 +21,6 @@ def download_photo(post_url, username, password):
         }
         response = requests.get(post_url, headers=headers, timeout=10)
         if response.ok:
-            from bs4 import BeautifulSoup
             soup = BeautifulSoup(response.text, "html.parser")
             tag = soup.find("meta", property="og:video") or soup.find("meta", property="og:image")
             if tag and tag.get("content"):
@@ -31,10 +32,12 @@ def download_photo(post_url, username, password):
                 with open(filepath, "wb") as f:
                     for chunk in media_response.iter_content(1024):
                         f.write(chunk)
-                print("downloaded with requests")
+                print("[✔] Downloaded using requests")
                 return filepath
     except Exception as e:
-        print(f"[Requests download failed] {e}")
+        print(f"[✖] Requests download failed: {e}")
+
+    driver = None
     try:
         chrome_options = Options()
         chrome_options.add_argument("--headless")
@@ -46,19 +49,18 @@ def download_photo(post_url, username, password):
             service=Service("/usr/bin/chromedriver"),
             options=chrome_options
         )
+        wait = WebDriverWait(driver, 15)
         driver.get("https://www.instagram.com/accounts/login/")
-        WebDriverWait(driver, 12).until(
-            EC.presence_of_element_located((By.NAME, "username"))
-        ).send_keys(username)
-        WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.NAME, "password"))
-        ).send_keys(password)
-        WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.XPATH, "//button[@type='submit']"))
-        ).click()
-        time.sleep(8)
+        wait.until(EC.presence_of_element_located((By.NAME, "username"))).send_keys(username)
+        wait.until(EC.presence_of_element_located((By.NAME, "password"))).send_keys(password)
+        login_button = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@type='submit']")))
+        try:
+            login_button.click()
+        except:
+            ActionChains(driver).move_to_element(login_button).click().perform()
+        time.sleep(6)
         driver.get(post_url)
-        time.sleep(8)
+        time.sleep(6)
         media_element = driver.find_element(By.XPATH, "//video | //img")
         media_url = media_element.get_attribute("src")
         ext = "mp4" if "video" in media_url else "jpg"
@@ -68,13 +70,11 @@ def download_photo(post_url, username, password):
         with open(filepath, "wb") as f:
             for chunk in media_response.iter_content(1024):
                 f.write(chunk)
-        print("Downloaded with selenium")
+        print("[✔] Downloaded using Selenium")
         return filepath
     except Exception as e:
-        print(f"selenium download failed {e}")
+        print(f"[✖] Selenium download failed: {e}")
         return None
     finally:
-        try:
+        if driver:
             driver.quit()
-        except:
-            pass
