@@ -28,29 +28,25 @@ def all_routes(app):
             )
         else:
             return jsonify(["some error occuers to download video please retry"])
-    @app.route("/photo", methods=["GET", "POST"])
+    @app.route("/photo",methods=["GET","POST"])
     def photo_downloader():
-        if request.method == "GET":
+        if request.method=="GET":
             return render_template("photo_downloader.html")
-    
-        client_ip = request.remote_addr
+        client_ip=request.remote_addr
         if rate_limit(client_ip):
-            return jsonify({"error": "Rate limit exceeded, try again later"}), 429
-    
-        post_url = request.form.get("url")
-        username = request.form.get("username")
-        password = request.form.get("password")
-    
+            return jsonify({"error":"rate limit exceed ,try again later"}),429
+        post_url=request.form.get("url")    
+        username=request.form.get("username")
+        password=request.form.get("password")
         if not post_url:
-            return jsonify({"error": "Please enter a valid URL"}), 400
-    
-        file_path = download_photo(post_url, username, password)
+            return jsonify(["no url found, try again otherwise please enter a valid url"])
+        file_path=download_photo(post_url,username,password)
         if file_path and os.path.exists(file_path):
             return send_file(
                 file_path,
                 as_attachment=True,
-                mimetype="image/jpeg",
+                mimetype="image/jpg",
                 download_name=os.path.basename(file_path)
             )
-    
-        return jsonify({"error": "Failed to download image or video"}), 400
+        else:
+            return jsonify({"error": "Failed to download video"}), 400
