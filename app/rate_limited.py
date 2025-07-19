@@ -17,7 +17,7 @@ except Exception as e:
     redis_client=None   
 download_folder=os.path.join(os.path.expanduser("~"),"Downloads")
 os.makedirs(download_folder,exist_ok=True)
-def rate_limit(ip,limit=15,duration=60):
+def rate_limit(ip,limit=8,duration=60):
     if redis_client:
         if redis_client:
             key = f"ratelimit:{ip}"
