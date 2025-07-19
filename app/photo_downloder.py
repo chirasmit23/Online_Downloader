@@ -9,10 +9,25 @@ from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import ElementClickInterceptedException
+from selenium.common.exceptions import ElementClickInterceptedException, TimeoutException, WebDriverException
 
 download_folder = os.path.join(os.path.expanduser("~"), "Downloads")
 os.makedirs(download_folder, exist_ok=True)
+
+def download_media_file(media_url, ext):
+    filename = f"photo_{uuid.uuid4().hex}.{ext}"
+    filepath = os.path.join(download_folder, filename)
+    try:
+        with requests.get(media_url, stream=True, timeout=10) as media_response:
+            media_response.raise_for_status()
+            with open(filepath, "wb") as f:
+                for chunk in media_response.iter_content(chunk_size=8192):
+                    if chunk:
+                        f.write(chunk)
+        return filepath
+    except Exception as e:
+        print(f"[Download failed] {e}")
+        return None
 
 def download_photo(post_url, username, password):
     try:
@@ -24,22 +39,16 @@ def download_photo(post_url, username, password):
         response = requests.get(post_url, headers=headers, timeout=10)
         if response.ok:
             soup = BeautifulSoup(response.text, "html.parser")
-            tag = soup.find("meta", property="og:video") or soup.find("meta", property="og:image")
+            tag = soup.find("meta", property="og:image") or soup.find("meta", property="og:video")
             if tag and tag.get("content"):
                 media_url = tag["content"]
                 ext = "mp4" if "video" in media_url else "jpg"
-                filename = f"photo_{uuid.uuid4().hex}.{ext}"
-                filepath = os.path.join(download_folder, filename)
-                media_response = requests.get(media_url, stream=True)
-                with open(filepath, "wb") as f:
-                    for chunk in media_response.iter_content(1024):
-                        f.write(chunk)
                 print("Downloaded with requests")
-                return filepath
+                return download_media_file(media_url, ext)
     except Exception as e:
-        print(f"[Requests download failed] {e}")
+        print(f"[Requests failed] {e}")
 
-    # Fallback to Selenium
+    # === Selenium fallback ===
     driver = None
     try:
         chrome_options = Options()
@@ -56,32 +65,24 @@ def download_photo(post_url, username, password):
         wait.until(EC.presence_of_element_located((By.NAME, "username"))).send_keys(username)
         wait.until(EC.presence_of_element_located((By.NAME, "password"))).send_keys(password)
 
-        # Wait for login button and click it safely
         login_btn = wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@type='submit']")))
         try:
             login_btn.click()
         except ElementClickInterceptedException:
             driver.execute_script("arguments[0].click();", login_btn)
 
-        time.sleep(8)  # Let Instagram log in and load
+        time.sleep(6)
         driver.get(post_url)
-        time.sleep(6)  # Wait for content to load
+        time.sleep(5)
 
         media_element = driver.find_element(By.XPATH, "//video | //img")
         media_url = media_element.get_attribute("src")
         ext = "mp4" if "video" in media_url else "jpg"
-        filename = f"photo_{uuid.uuid4().hex}.{ext}"
-        filepath = os.path.join(download_folder, filename)
-
-        media_response = requests.get(media_url, stream=True)
-        with open(filepath, "wb") as f:
-            for chunk in media_response.iter_content(1024):
-                f.write(chunk)
-
         print("Downloaded with Selenium")
-        return filepath
-    except Exception as e:
-        print(f"[Selenium download failed] {e}")
+        return download_media_file(media_url, ext)
+
+    except (TimeoutException, WebDriverException, Exception) as e:
+        print(f"[Selenium failed] {e}")
         return None
     finally:
         if driver:
