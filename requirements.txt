@@ -6,3 +6,4 @@ yt-dlp
 python-dotenv==1.0.1
 python-dotenv
 gunicorn 
+beautifulsoup4
