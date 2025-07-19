@@ -32,30 +32,25 @@ def all_routes(app):
     def photo_downloader():
         if request.method == "GET":
             return render_template("photo_downloader.html")
-        
+    
         client_ip = request.remote_addr
         if rate_limit(client_ip):
-            return jsonify({"error": "rate limit exceeded, try again later"}), 429
-        
+            return jsonify({"error": "Rate limit exceeded, try again later"}), 429
+    
         post_url = request.form.get("url")
         username = request.form.get("username")
         password = request.form.get("password")
-        
+    
         if not post_url:
-            return jsonify({"error": "No URL provided, please enter a valid Instagram post URL"}), 400
-        
+            return jsonify({"error": "Please enter a valid URL"}), 400
+    
         file_path = download_photo(post_url, username, password)
-        
         if file_path and os.path.exists(file_path):
-            mimetype = "video/mp4" if file_path.endswith(".mp4") else "image/jpeg"
             return send_file(
                 file_path,
                 as_attachment=True,
-                mimetype=mimetype,
+                mimetype="image/jpeg",
                 download_name=os.path.basename(file_path)
             )
-        else:
-            return jsonify({"error": "Failed to download media"}), 400
-        
-            
-            
+    
+        return jsonify({"error": "Failed to download image or video"}), 400
